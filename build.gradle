@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'jshi.Jason.Main'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' } // Spigot API
+    maven { url 'https://jitpack.io' } // JitPack for additional dependencies
+    maven { url 'https://m2.dv8tion.net/releases' } // JDA releases
+}
+
+dependencies {
+    // Spigot API (Use Paper if possible for better performance)
+    compileOnly 'org.spigotmc:spigot-api:1.21.4-R0.1-SNAPSHOT'
+
+    // JDA for Discord bot
+    implementation 'net.dv8tion:JDA:5.0.0-beta.12' // Use stable version
+
+    // Gson (for JSON parsing, only if needed)
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    // Exclude SLF4J to prevent logging conflicts with Spigot
+    implementation('net.dv8tion:JDA:5.0.0-beta.12') {
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+    }
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17)) // Spigot requires Java 17+
+    }
+}
+
+tasks.named('build') {
+    dependsOn 'shadowJar'
+}
+
+shadowJar {
+    archiveFileName.set("DiscordxSpigot.jar") // Set output JAR name
+    configurations = [project.configurations.runtimeClasspath] // Ensure dependencies are included
+}
+

@@ -19,4 +19,8 @@ public class CommandManager {
             ctx.getEvent().getChannel().sendMessage("Unknown command!").queue();
         }
     }
+
+    public Map<String, Command> getMapCommands() {
+        return commands;
+    }
 }

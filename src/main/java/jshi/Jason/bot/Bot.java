@@ -1,9 +1,6 @@
 package jshi.Jason.bot;
 
-import jshi.Jason.bot.commands.CommandContext;
-import jshi.Jason.bot.commands.CommandManager;
-import jshi.Jason.bot.commands.HelloCommand;
-import jshi.Jason.bot.commands.WhiteList;
+import jshi.Jason.bot.commands.*;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -55,6 +52,10 @@ public class Bot extends ListenerAdapter implements Listener {
         //Register commands
         commandManager.registerCommand("hello", new HelloCommand());
         commandManager.registerCommand("whitelist", new WhiteList(plugin));
+
+
+        //put this one last <------ Help command to get the list
+        commandManager.registerCommand("help", new Help(commandManager.getMapCommands()));
     }
 
     @Override

@@ -13,9 +13,11 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.TextDisplay;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -99,5 +101,16 @@ public class Bot extends ListenerAdapter implements Listener {
         assert channel != null;
         channel.sendMessageEmbeds(embed.build()).queue();
 
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        String playerName = event.getPlayer().getName();
+        TextChannel channel = jda.getTextChannelById(TARGET_CHANNEL_ID);
+
+        EmbedBuilder embed = new EmbedBuilder().setColor(Color.YELLOW).setTitle("[" + playerName + "]: " + "has joined the Server");
+
+        assert channel != null;
+        channel.sendMessageEmbeds(embed.build()).queue();
     }
 }

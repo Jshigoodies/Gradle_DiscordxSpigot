@@ -10,7 +10,7 @@ import javax.security.auth.login.LoginException;
 
 public class Main extends JavaPlugin {
     private Bot bot;
-    private final String token = "MTM0NDIwMzIxNDI2NTkwOTI1MQ.GI7tqu.fB0h4EBYYjH5GgLXfE8hwr1c-tlTimKVqB5br4";
+    private final String token = "";
     @Override
     public void onEnable() {
         this.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[DiscordXSpigot] Started");
